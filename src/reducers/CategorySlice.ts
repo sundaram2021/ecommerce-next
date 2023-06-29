@@ -33,7 +33,7 @@ const CategorySlice = createSlice({
 export const { setCategory, setStatus, setCate, removeCate } = CategorySlice.actions;
 export default CategorySlice.reducer;
 
-export function fetchCategory() {
+export function useFetchCategory() {
   return async function fetchProductThunk(dispatch: Dispatch) {
     dispatch(setStatus(STATUS.LOADING));
     try {

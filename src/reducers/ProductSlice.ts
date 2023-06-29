@@ -33,7 +33,7 @@ interface CateInterface {
     }
 }
 
-export function fetchProduct() {
+export function useFetchProduct() {
     const category = useSelector((state: CateInterface) => state.category.cate);
   return async function fetchProductThunk(dispatch: Dispatch) {
     dispatch(setStatus(STATUS.LOADING));
