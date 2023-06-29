@@ -26,9 +26,11 @@ function Product() {
     //         .then(res=>res.json())
     //         .then(json=>console.log(json))
 
-    fetch('https://github.com/iffi96/Shoe-store-data-json/blob/master/data001.json')
-            .then(res=>res.json())
-            .then(json=>console.log(json))
+    // fetch('https://github.com/iffi96/Shoe-store-data-json/blob/master/data001.json')
+    //         .then(res=>res.json())
+    //         .then(json=>console.log(json))
+    console.log("clicked");
+    
   }
   return (
     <div onClick={fetchProduct}>Product</div>
