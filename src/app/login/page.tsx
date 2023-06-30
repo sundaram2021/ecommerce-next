@@ -7,9 +7,9 @@ import { BsGithub } from 'react-icons/bs';
 import { BsFillShieldLockFill } from 'react-icons/bs';
 import { GoogleAuthProvider, signInWithPopup, GithubAuthProvider } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 function page() {
-    const router = useRouter();
+    // const router = useRouter();
     const googleProvider = new GoogleAuthProvider();
     const githubProvider = new GithubAuthProvider();
 
@@ -24,7 +24,8 @@ function page() {
                 photoURL: result.user.photoURL,
             })
 
-            router.push('/')
+            // router.push('/')
+            window.location.href = '/'
         } catch (error) {
             console.log(error);
         }
@@ -40,7 +41,8 @@ function page() {
                 photoURL: result.user.photoURL,
             })
 
-            router.push('/')
+            // router.push('/')
+            window.location.href = '/'
         } catch (error) {
             console.log(error);
         }
