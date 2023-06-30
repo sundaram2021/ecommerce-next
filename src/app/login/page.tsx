@@ -8,7 +8,7 @@ import { BsFillShieldLockFill } from 'react-icons/bs';
 import { GoogleAuthProvider, signInWithPopup, GithubAuthProvider } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
-function Login() {
+function page() {
     const router = useRouter();
     const googleProvider = new GoogleAuthProvider();
     const githubProvider = new GithubAuthProvider();
@@ -60,4 +60,4 @@ function Login() {
     )
 }
 
-export default Login
+export default page
