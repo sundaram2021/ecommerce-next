@@ -1,11 +1,13 @@
 "use client"
 
-import Slider from '../components/Slider';
+import Banner from "@/components/Banner"
 
 
 export default function page() {
 
   return (
-    <Slider />
+    <div >
+      <Banner />
+    </div>
   )
 }

@@ -16,12 +16,18 @@
   }
 } */
 
+/* border color => #3c4043 */
+
+body{
+  background-color: #202124;
+  color: #e8eaed;
+}
 
  
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: #202124;
+    --foreground: #e8eaed;
  
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
