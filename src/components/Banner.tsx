@@ -1,6 +1,5 @@
 "use client"
 import { auth } from '@/utils/firebase';
-import Image from 'next/image'
 import React from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 
