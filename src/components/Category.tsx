@@ -17,6 +17,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "./ui/popover"
+import Link from "next/link"
 
 const frameworks = [
   {
@@ -65,9 +66,7 @@ export function Category() {
           aria-expanded={open}
           className="w-[200px] justify-between border-none"
         >
-          {value
-            ? frameworks.find((framework) => framework.value === value)?.label
-            : "Catgories"}
+          Categories
           <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -75,9 +74,12 @@ export function Category() {
       <PopoverContent className="w-[200px] p-0">
         <Command>
           <CommandGroup>
-            {frameworks.map((framework) => (
+            {frameworks.map((framework) => {
+              console.log(framework.value)
+              return (
+              <Link key={framework.value} href={`/category/${framework.label.toLowerCase()}`}>
               <CommandItem
-                key={framework.value}
+                
                 onSelect={(currentValue) => {
                   setValue(currentValue === value ? "" : currentValue)
                   setOpen(false)
@@ -91,7 +93,8 @@ export function Category() {
                   )}
                 />
               </CommandItem>
-            ))}
+              </Link>
+            )})}
           </CommandGroup>
         </Command>
       </PopoverContent>
