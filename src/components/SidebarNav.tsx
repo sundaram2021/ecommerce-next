@@ -29,9 +29,11 @@ export function SidebarNav() {
 }
 
   return (
-    <Sheet  >
+    <Sheet>
     <SheetTrigger asChild>
+      <div>
       <RxHamburgerMenu className="sm:text-4xl text-lg ml-[-20px] text-gray-400 cursor-pointer hover:bg-gray-800 sm:p-2 rounded-full" />
+      </div>
     </SheetTrigger>
     <SheetContent side="left" className="bg-[#202124]">
       <SheetHeader className="mb-6">
@@ -39,22 +41,22 @@ export function SidebarNav() {
       </SheetHeader>
       <Separator className="bg-[#3c4043]" />
       <div className="flex flex-col gap-4 py-4">
-        <Link  href="/" className="flex items-center text-xl gap-6  hover:bg-slate-600 rounded-full py-3">
+        <Link  href="/" className="flex items-center text-xl gap-6  hover:bg-[#676c76] rounded-full py-3">
           <span className="text-3xl"><AiFillHome /></span>
           Home
         </Link>
-        <Link  href="/product" className="flex items-center text-xl gap-6  hover:bg-slate-600 rounded-full py-3">
+        <Link  href="/product" className="flex items-center text-xl gap-6  hover:bg-[#676c76] rounded-full py-3">
           <span className="text-3xl"><ShoppingBag /></span>
           Products
         </Link>
         <Category />
         {user ? 
-          <Link  href="" className="flex items-center text-xl gap-6  hover:bg-slate-600 rounded-full py-3" onClick={handleLogout}>
+          <Link  href="" className="flex items-center text-xl gap-6  hover:bg-[#676c76] rounded-full py-3" onClick={handleLogout}>
             <span className="text-3xl">{loading ? <Loader2 /> :<LogOut />}</span>
             LogOut
           </Link>
           :
-          <Link  href="/login" className="flex items-center text-xl gap-6  hover:bg-slate-600 rounded-full py-3">
+          <Link  href="/login" className="flex items-center text-xl gap-6  hover:bg-[#676c76] rounded-full py-3">
             <span className="text-3xl"><LogIn /></span>
             LogIn
           </Link>
