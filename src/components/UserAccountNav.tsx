@@ -12,7 +12,6 @@ import {
 import Image from 'next/image'
 import { RxAvatar } from 'react-icons/rx'
 import { auth } from "@/utils/firebase";
-import { useState } from "react";
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 
