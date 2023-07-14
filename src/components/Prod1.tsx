@@ -23,19 +23,30 @@ interface Product {
   categories: string[];
 }
 
-function Prod1({pd}: {pd: string}) {
+
+type ProductProps = {
+    pd?: string;
+    cate?: string;
+}
+
+function Prod1(props: ProductProps) {
+  const { pd, cate } = props;
   const [loading, setLoading] = React.useState<boolean>(true);
   const [products, setProducts] = React.useState<Product[]>([]);
   const [displayedProducts, setDisplayedProducts] = React.useState<number>(12);
 
   function fetchProducts(limit: number) {
     setLoading(true);
-    fetch(`https://raw.githubusercontent.com/algolia/datasets/master/ecommerce/bestbuy_seo.json?limit=${limit}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}?limit=${limit}`)
       .then(res => res.json())
       .then((json: Product[]) => {
         const headphonesProducts: Product[] = json.filter((item: Product) => {
           return item.categories.some(category => {
-            return category && category.toLowerCase().trim() === pd.toLowerCase().trim();
+            // console.log(" xx",category.toLowerCase().trim() === pd);
+
+            if((cate !== undefined) && (pd === undefined)) return category && category.toLowerCase().split(" ").join("") === cate.split(" ").join("");
+            
+            if((cate === undefined) && (pd !== undefined)) return category && category.toLowerCase().trim() === pd.toLowerCase().trim();
           });
         });
 
@@ -67,13 +78,14 @@ function Prod1({pd}: {pd: string}) {
   return (
     <>
     <div className='mt-20 ml-16  snap-x-none'>
-      <h3 className='mb-6 text-xl'>{pd.toUpperCase()}</h3>
+      {(pd !== undefined) ? <h3 className='mb-6 text-xl'>{pd?.toUpperCase()}</h3> : ""}
+      {(cate !== undefined) ?  <h3 className='mb-6 text-xl'>{cate.toUpperCase()}</h3>: ""}
       {(loading || !products) ? 
       (new Array(15).fill(null).map((item, idx) => <div className='w-[300px] h-[300px] animate-pulse' key={idx}></div>)) : 
       (<div className='items-center grid grid-rows-1 sm:grid-rows-2 md:grid-rows-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 '>
         {products.slice(0, displayedProducts).map((product: Product) => {
           return (
-            <Link href={`product/${product.objectID}`} className='text-white flex flex-col items-center gap-2 justify-center mb-6 w-[300px] h-[300px] rounded-lg ' key={product.objectID}>
+            <Link href={`/product/${product.objectID}`} className='text-white flex flex-col items-center gap-2 justify-center mb-6 w-[300px] h-[300px] rounded-lg ' key={product.objectID}>
               <div className='bg-white w-full rounded-lg shadow-sm mx-auto shadow-white'>
                 <img
                   src={product.image as string}
@@ -89,7 +101,7 @@ function Prod1({pd}: {pd: string}) {
         })}
       </div>
       )}
-      {displayedProducts < products.length && (
+      {displayedProducts < products.length  && (
         <button className='mt-2 mb-2 mx-auto flex text-blue-300' onClick={handleSeeMoreClick}>See More <ChevronDown /></button>
       )}
     </div>
