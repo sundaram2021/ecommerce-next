@@ -46,11 +46,11 @@ function page({params}: {params: {productId: string}}) {
     <div>
         <div className='w-[90%] mx-auto ml-16 mb-6 mt-10 flex flex-col sm:flex-row  justify-between items-start gap-6'>
             <div className='sm:w-[50%] w-[85%] rounded-lg shadow-sm shadow-white bg-white'>
-              {product ? <img className='rounded-md' src={product.image} alt="" />: <div className='bg-[#676c76] w-full animate-pulse'></div>}
+              {product ? <img className='rounded-md  md:h-[300px] sm:h-[300px] h-[200px]' src={product.image} alt="" />: <div className='bg-[#676c76] w-full animate-pulse'></div>}
             </div>
             <div className='sm:w-[50%] w-[85%] flex flex-col gap-4'>
               <h1 className='font-bold'>{product?.name}</h1>
-              <p className='font-thin'>{product?.shortDescription}</p>
+              <p className='font-thin line-clamp-3' title={product?.shortDescription}>{product?.shortDescription}</p>
               <p className='font-semibold'>${product?.salePrice}</p>
               <p className='font-semibold'>Rank: {product?.bestSellingRank}</p>
             </div>
