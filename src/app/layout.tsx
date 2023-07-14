@@ -2,8 +2,9 @@
 
 import './globals.css'
 import { Inter } from 'next/font/google'
-import ReduxProvider from '@/context/ReduxProvider'
+import { ClerkProvider } from '@clerk/nextjs'
 import Navbar from '@/components/Navbar'
+import NextTopLoader from 'nextjs-toploader'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,14 +19,15 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
+    <ClerkProvider >
       <html lang="en">
-        <ReduxProvider>
-          <body className={inter.className}>
-            <Navbar />
-            {children}
-          </body>
-        </ReduxProvider>
-      </html>
+        <body className={inter.className}>
+          <NextTopLoader showSpinner={false} />
+          <Navbar />
+          {children}
+        </body>
+      </html> 
+    </ClerkProvider>   
     
   )
 }
