@@ -31,7 +31,7 @@ function Prod2() {
 
   function fetchProducts(limit: number) {
     setLoading(true);
-    fetch(`https://raw.githubusercontent.com/algolia/datasets/master/ecommerce/bestbuy_seo.json?limit=${limit}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}?limit=${limit}`)
       .then((res) => res.json())
       .then((json: Product[]) => {
         const headphonesProducts: Product[] = json.filter((item: Product) => {
