@@ -13,20 +13,14 @@ import {
 } from "./ui/Sheet"
 import {Category}  from "./Category"
 import Link from "next/link"
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "@/utils/firebase";
 import { useState } from "react";
+import { useUser } from "@clerk/nextjs";
+import { SignOutButton } from "@clerk/nextjs";
 
 
 export function SidebarNav() {
-  const [user] = useAuthState(auth);
+  const {user} = useUser();
   const [loading, setLoading] = useState<Boolean>(false);
-
-  const handleLogout = async() => {
-    setLoading(true);
-    await auth.signOut();
-    setLoading(false);
-}
 
   return (
     <Sheet>
@@ -45,18 +39,18 @@ export function SidebarNav() {
           <span className="text-3xl"><AiFillHome /></span>
           Home
         </Link>
-        <Link  href="/product" className="flex items-center text-xl gap-6  hover:bg-[#676c76] rounded-full py-3">
+        <Link  href='/' className="flex items-center text-xl gap-6  hover:bg-[#676c76] rounded-full py-3">
           <span className="text-3xl"><ShoppingBag /></span>
           Products
         </Link>
         <Category />
         {user ? 
-          <Link  href="" className="flex items-center text-xl gap-6  hover:bg-[#676c76] rounded-full py-3" onClick={handleLogout}>
+          <Link  href="" className="flex items-center text-xl gap-6  hover:bg-[#676c76] rounded-full py-3">
             <span className="text-3xl">{loading ? <Loader2 /> :<LogOut />}</span>
-            LogOut
+            <SignOutButton />
           </Link>
           :
-          <Link  href="/login" className="flex items-center text-xl gap-6  hover:bg-[#676c76] rounded-full py-3">
+          <Link  href="/sign-in" className="flex items-center text-xl gap-6  hover:bg-[#676c76] rounded-full py-3">
             <span className="text-3xl"><LogIn /></span>
             LogIn
           </Link>
