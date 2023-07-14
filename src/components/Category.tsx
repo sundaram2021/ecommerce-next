@@ -21,32 +21,32 @@ import Link from "next/link"
 
 const frameworks = [
   {
-    value: "Phones cases",
-    label: "cell phone cases and clips",
+    value: "security software",
+    label: "computer security software",
   },
   {
-    value: "TVs",
-    label: "flat-panel TVs",
+    value: "Data Cables",
+    label: "data cables",
   },
   {
     value: "Headphones",
     label: "headphones",
   },
   {
-    value: "Ipad acessories",
-    label: "ipad cases, covers and sleeves",
+    value: "pc laptops",
+    label: "pc laptops",
   },
   {
-    value: "Printer ink",
-    label: "printer ink",
+    value: "streaming media players",
+    label: "streaming media players",
   },
   {
-    value: "laptop accessories",
-    label: "laptop bags and cases",
+    value: "Usb Flash Drives",
+    label: "usb flash drives",
   },
   {
-    value: "Gaming consoles",
-    label: "x-box 360 games",
+    value: "Wireless Mice",
+    label: "wireless mice",
   },
 ]
 
@@ -56,15 +56,14 @@ export function Category() {
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <div className="flex items-center">
+      <div className="flex items-center gap-2">
       <ListOrdered className="text-3xl" />
       <PopoverTrigger asChild className="">
-        
         <Button
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between border-none"
+          className="w-[200px] justify-between border-none text-lg"
         >
           Categories
           <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -76,8 +75,9 @@ export function Category() {
           <CommandGroup>
             {frameworks.map((framework) => {
               console.log(framework.value)
+              const categoryId = framework.label.toLowerCase();
               return (
-              <Link key={framework.value} href={`/category/${framework.label.toLowerCase()}`}>
+              <Link key={framework.value} href={`/category/${categoryId}`}>
               <CommandItem
                 
                 onSelect={(currentValue) => {
