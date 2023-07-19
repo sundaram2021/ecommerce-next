@@ -5,7 +5,7 @@ import React from 'react'
 function Banner() {
   const {user} = useUser();
   return (
-    <div className='flex justify-center items-center'>
+    <div className='flex justify-center items-center '>
         <div className='sm:hidden pt-10'>
             <img className='object-cover w-[90%] h-[100%] mx-auto' src="banner2.jpg"  alt="" />
         </div>

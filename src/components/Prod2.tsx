@@ -4,23 +4,7 @@ import React from 'react';
 import Slider from './Slider';
 import { Separator } from './ui/separator';
 import Link from 'next/link';
-
-interface Product {
-  name: string;
-  shortDescription: string;
-  bestSellingRank: number;
-  thumbnailImage: string;
-  salePrice: number;
-  manufacturer: string;
-  url: string;
-  type: string;
-  image: string;
-  customerReviewCount: number;
-  shipping: string;
-  salePrice_range: string;
-  objectID: string;
-  categories: string[];
-}
+import { Product } from '@/types';
 
 function Prod2() {
     let x = 0, y = 0;

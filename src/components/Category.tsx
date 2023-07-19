@@ -4,7 +4,7 @@ import * as React from "react"
 import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons"
 import { ListOrdered } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { Button } from "./ui/Button"
+import { Button } from "./ui/button"
 import {
   Command,
   CommandEmpty,

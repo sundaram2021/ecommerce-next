@@ -1,9 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import { useAuth, useUser } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 import { SignOutButton } from "@clerk/nextjs";
-
+import { ShoppingCart } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,13 +14,28 @@ import {
 import Image from 'next/image'
 import { RxAvatar } from 'react-icons/rx'
 import { LogIn, LogOut } from 'lucide-react';
+import { Cart } from '@/types';
+import React from 'react';
 
 
 
 export function UserAccountNav() {
-    const u = useAuth();
     const {user} = useUser();
     console.log("u",user);
+    const [cart, setCart] = React.useState<Cart[]>([]);
+    const [totalItems, setTotalItems] = React.useState<number>(0);
+    const fetchCart = async () => {
+      const res = await fetch('/api/cart');
+      const data = await res.json();
+      setCart(data);
+
+      const totalItemsCount = data.reduce((acc: number, curr: Cart) => acc + curr.qty, 0);
+      setTotalItems(totalItemsCount);
+    };
+  
+    React.useEffect(() => {
+      fetchCart();
+    }, []);
     
   return (
     <DropdownMenu >
@@ -43,7 +58,12 @@ export function UserAccountNav() {
           </div>
         </div>
         <DropdownMenuSeparator />
-        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <Link href="/cart" className='flex items-center gap-6'>
+            <ShoppingCart className='text-3xl' />
+            <p className='text-xl'>{totalItems}</p>
+          </Link>
+        </DropdownMenuItem>
         {user ?
         <DropdownMenuItem
           className='cursor-pointer flex items-center text-xl gap-6 text-gray-500'
@@ -57,6 +77,7 @@ export function UserAccountNav() {
             LogIn</Link>
         </DropdownMenuItem>
         }
+        
       </DropdownMenuContent>
     </DropdownMenu>
   )
