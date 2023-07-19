@@ -1,29 +1,38 @@
 
+
+
 export interface Product {
-    id: string
-    name: string
-    price: number
-    description: string
-    image: string
-}
-
-export interface User {
-    id: string
-    name: string
-    email: string
-    password: string
-}
-
-export interface CartItem {
-    id: string
-    productId: string
-    quantity: number
-}
-
-export interface Cart {
-    id: string
-    userId: string
-    productId: string
-    quantity: number
-    items: CartItem[]
-}
+    name: string;
+    shortDescription: string;
+    bestSellingRank: number;
+    thumbnailImage: string;
+    salePrice: number;
+    manufacturer: string;
+    url: string;
+    type: string;
+    image: string;
+    customerReviewCount: number;
+    shipping: string;
+    salePrice_range: string;
+    objectID: string;
+    categories: string[];
+  }
+  
+  export interface Cart {
+    id: number;
+    name: string;
+    description: string;
+    user: User;
+    userId: number;
+    productId: string;
+    price: number;
+    img: string;
+    qty: number;
+  }
+  
+ export interface User {
+    id: number;
+    name: string;
+    email: string;
+    carts: Cart[];
+  }
