@@ -11,7 +11,7 @@ function page({params}: {params: {categoryId: string}}) {
   
   return (
     <div>
-        <MainProd cat={cat}  />
+        <MainProd cat={cat} scrolling={true}  />
     </div>
   )
 }
