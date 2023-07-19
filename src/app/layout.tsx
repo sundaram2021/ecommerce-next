@@ -5,7 +5,8 @@ import { Inter } from 'next/font/google'
 import { ClerkProvider } from '@clerk/nextjs'
 import Navbar from '@/components/Navbar'
 import NextTopLoader from 'nextjs-toploader'
-
+import { dark } from '@clerk/themes' 
+import ProviderComponent from '@/components/Provider'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -19,14 +20,16 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <ClerkProvider >
-      <html lang="en">
-        <body className={inter.className}>
-          <NextTopLoader showSpinner={false} />
-          <Navbar />
-          {children}
-        </body>
-      </html> 
+    <ClerkProvider appearance={{baseTheme: dark}} >
+      <ProviderComponent>
+        <html lang="en">
+          <body className={inter.className}>
+            <NextTopLoader showSpinner={false} />
+            <Navbar />
+            {children}
+          </body>
+        </html> 
+      </ProviderComponent>
     </ClerkProvider>   
     
   )

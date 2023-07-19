@@ -24,6 +24,17 @@ body{
   overflow-x: hidden;
 }
 
+@media only screen and (min-width:1000px) and (max-width: 1200px) {
+  body{
+    overflow-x: scroll;
+  }
+}
+  
+.banner-div {
+  background: url('/public/banner2.jpg');
+}
+
+
  
 @layer base {
   :root {
