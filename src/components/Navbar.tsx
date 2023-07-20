@@ -10,7 +10,7 @@ import SearchBar from './SearchBar';
 
 function Navbar() {
   return (
-    <div className=' sticky py-10 px-8 border-b-[1px] border-solid border-b-[#3c4043]  w-[100vw] max-w-10xl flex justify-center items-center '>
+    <div className=' max-w-[1500px] sticky py-10 px-8 border-b-[1px] border-solid border-b-[#3c4043]  w-[100vw] max-w-10xl flex justify-center items-center '>
         <div className='relative w-full flex  justify-around items-center sm:gap-2 mx-auto'>
             <SidebarNav />
             <div className=''>
