@@ -53,28 +53,6 @@ function Page({ params }: { params: { productId: string } }) {
         variant: 'default',
       })
     }
-
-    const dd = await fetch(`/api/cart/${id}`, {
-      method: "POST",
-      body: JSON.stringify({
-        productId: id,
-      }),
-    }).then((res) => res.json()).catch((err) => {
-      console.log('err', err);
-    });
-
-    console.log('dd', dd);
-    
-    
-    // if the product is already in the then send the message using toast and return
-    if(dd){
-      console.log('Product already in cart');
-      setLoading(false);
-      return toast({
-        title: 'Already in cart',
-        variant: 'default',
-      })
-    }
   
     try {
       const res = await fetch('/api/cart', {

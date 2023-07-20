@@ -36,44 +36,13 @@ export async function PATCH(req: Request, res: Response)  {
         }
     }
 
-    return NextResponse.json(cartData);
+    const cartDataAfterUpdate = await prisma.cart.findMany({})
+
+    return NextResponse.json(cartDataAfterUpdate);
    
 }
 
-// make a delete route that deletes the cart item from the cart table on the basis of productId getting from req.json()
-export async function DELETE(req: Request)  {
-    const url = new URL(req.url as string);
-    const productId  = url.searchParams.get('id') || "";
-    
-    const cartData = await prisma.cart.delete({
-        where: {
-            productId
-        }
-    });
 
-    return NextResponse.json(cartData);
-   
-}
-
-// make a get route that send the data on the basis of id getting from body
-
-// export async function GET(req: Request, res: Response)  {
-//     const url = new URL(req.url as string);
-//     const id = url.searchParams.get('id');
-
-//     if (!id){
-//         return;
-//     }
-    
-//     const cartData = await prisma.cart.findUnique({
-//         where: {
-//             productId: id as string
-//         }
-//     });
-
-//     return NextResponse.json(cartData);
-   
-// }
 
 export async function POST(req: Request, res: Response)  {
     const { productId } = await req.json();
@@ -88,6 +57,8 @@ export async function POST(req: Request, res: Response)  {
     if(!cartData) {
         return NextResponse.json({msg: "no cart found"});
     }
+
+    
 
     return NextResponse.json(cartData);
 

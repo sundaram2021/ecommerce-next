@@ -112,3 +112,25 @@ export async function GET() {
       return NextResponse.json({ error: "An error occurred while fetching cart data." }, { status: 500 });
     }
   }
+
+  // / make a delete route that deletes the cart item from the cart table on the basis of productId getting from req.json()
+export async function DELETE(req: Request, res: Response)  {
+    const url = new URL(req.url as string);
+    // console.log('id => ', params.id);
+    
+    const productId  = url.searchParams.get('id') || "";
+
+    if(productId === "" || productId === null) return;
+
+    console.log('productId : ', productId);
+    
+    
+    const cartData = await prisma.cart.delete({
+        where: {
+            productId
+        }
+    });
+
+    return NextResponse.json(cartData);
+   
+}
