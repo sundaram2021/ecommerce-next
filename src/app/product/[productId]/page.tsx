@@ -7,6 +7,7 @@ import { Loader } from 'lucide-react';
 import { Product } from '@/types';
 import { useUser } from "@clerk/nextjs";
 import FilterComponent from '@/components/Filter';
+import { toast } from '@/hooks/use-toast';
 
 
 function Page({ params }: { params: { productId: string } }) {
@@ -44,6 +45,42 @@ function Page({ params }: { params: { productId: string } }) {
     }
 
     setLoading(true);
+    const id = product?.objectID;
+
+    if(id === null){
+      alert('Please select another product')
+    }
+
+    const dd = await fetch(`/api/cart/${id}`, {
+      method: "POST",
+      body: JSON.stringify({
+        productId: id,
+      }),
+    }).then((res) => res.json()).catch((err) => {
+      console.log('err', err);
+    });
+
+    console.log('dd', dd);
+
+    if(dd.msg){
+      return toast({
+        title: product?.name + ' already in cart',
+        description: product?.shortDescription  || "Product already in cart",
+        variant: 'default',
+      })
+    }
+    
+    
+    // if the product is already in the then send the message using toast and return
+    if(dd){
+      console.log('Product already in cart');
+      setLoading(false);
+      return toast({
+        title: product?.name + ' already in cart',
+        description: product?.shortDescription  || "Product already in cart",
+        variant: 'default',
+      })
+    }
   
     try {
       const res = await fetch('/api/cart', {
@@ -60,7 +97,19 @@ function Page({ params }: { params: { productId: string } }) {
           qty: 1,
         }),
       })
-      console.log('Cart created:', res.json());
+      const dr = await res.json();
+      if(dr.msg){
+        return toast({
+          title: product?.name + ' already in cart',
+          description: product?.shortDescription  || "Product already in cart",
+          variant: 'default',
+        })
+      }
+      return toast({
+        title: product?.name + ' added to cart',
+        description: product?.shortDescription,
+        variant: 'default',
+      })
     } catch (error) {
       console.error('Error creating cart:', error);
     } finally {
