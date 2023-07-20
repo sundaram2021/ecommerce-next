@@ -4,7 +4,7 @@ import React from 'react';
 import { Cart } from '@/types';
 import { Loader } from 'lucide-react';
 import getStripePromise from '@/lib/stripe';
-import Stripe from 'stripe';
+import { toast } from '@/hooks/use-toast';
 
 function Page() {
   const [cart, setCart] = React.useState<Cart[]>([]);
@@ -20,6 +20,15 @@ function Page() {
   const fetchCart = async () => {
     const res = await fetch('/api/cart');
     const data = await res.json();
+
+    if(data.error){
+      return toast({
+        title: 'Something went wrong.',
+        description: 'Not able to fetch the cart',
+        variant: 'destructive',
+      })
+    }
+
     setCart(data);
 
     // Move the calculations for totalPrice and totalItems inside fetchCart
@@ -108,6 +117,12 @@ function Page() {
   
       // If the deletion was successful, call fetchCart to update the cart data
       await fetchCart();
+
+      return toast({
+        title: 'Cart Item Deleted',
+        description: 'Item removed from the cart',
+        variant: 'default',
+      })
     } catch (error) {
       console.error('Error deleting item from cart:', error);
     } finally {
@@ -137,6 +152,11 @@ function Page() {
       console.log('data', data);
 
       console.log("stripe", stripe);
+      toast({
+        title: 'Successfully checked out',
+        description: 'Your order is placed. Thank you for shopping with us.',
+        variant: 'default',
+      });
       // return stripe.redirectToCheckout({ sessionId: data.session.id });
       return stripe?.redirectToCheckout({ sessionId: data.session.id });
     } catch (error) {
