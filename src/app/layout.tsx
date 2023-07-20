@@ -1,5 +1,5 @@
 
-
+import { Toaster } from "@/components/ui/toaster"
 import './globals.css'
 import { Inter } from 'next/font/google'
 import { ClerkProvider } from '@clerk/nextjs'
@@ -27,6 +27,7 @@ export default function RootLayout({
             <NextTopLoader showSpinner={false} />
             <Navbar />
             {children}
+            <Toaster />
           </body>
         </html> 
       </ProviderComponent>

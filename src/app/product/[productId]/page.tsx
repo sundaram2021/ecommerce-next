@@ -48,7 +48,10 @@ function Page({ params }: { params: { productId: string } }) {
     const id = product?.objectID;
 
     if(id === null){
-      alert('Please select another product')
+      return toast({
+        title: 'Please refresh the page and try again',
+        variant: 'default',
+      })
     }
 
     const dd = await fetch(`/api/cart/${id}`, {
@@ -61,14 +64,6 @@ function Page({ params }: { params: { productId: string } }) {
     });
 
     console.log('dd', dd);
-
-    if(dd.msg){
-      return toast({
-        title: product?.name + ' already in cart',
-        description: product?.shortDescription  || "Product already in cart",
-        variant: 'default',
-      })
-    }
     
     
     // if the product is already in the then send the message using toast and return
@@ -76,8 +71,7 @@ function Page({ params }: { params: { productId: string } }) {
       console.log('Product already in cart');
       setLoading(false);
       return toast({
-        title: product?.name + ' already in cart',
-        description: product?.shortDescription  || "Product already in cart",
+        title: 'Already in cart',
         variant: 'default',
       })
     }
@@ -98,13 +92,14 @@ function Page({ params }: { params: { productId: string } }) {
         }),
       })
       const dr = await res.json();
-      if(dr.msg){
+      
+      if(dr === null){
         return toast({
-          title: product?.name + ' already in cart',
-          description: product?.shortDescription  || "Product already in cart",
+          title: 'Please refresh the page and try again',
           variant: 'default',
         })
       }
+
       return toast({
         title: product?.name + ' added to cart',
         description: product?.shortDescription,
